@@ -10,9 +10,11 @@ app.use(bodyParser.json()); // JSON parsing Middleware added
 app.use('/graphql', graphqlHttp({
     schema: buildSchema(`
         type RootQuery {
+            events: [String!]!
         }
         
         type RootMutation {
+            createEvent(name: String): String
         }
         
         schema {
@@ -20,7 +22,16 @@ app.use('/graphql', graphqlHttp({
             mutation: RootMutation
         }
     `),
-    rootValue: {}
+    rootValue: {
+        events: () => {
+            return ['Cooking', 'All-Night Coding', 'Romantic'];
+        },
+        createEvent: (args) => {
+            const eventName = args.name; // same as that of the parameter for `createEvent`
+            return eventName;
+
+        }
+    }
 }));
 
 app.listen(3000);
