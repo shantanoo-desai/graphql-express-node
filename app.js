@@ -3,6 +3,9 @@ const bodyParser = require('body-parser'); // Add Body-Parser Middleware for JSO
 const graphqlHttp = require('express-graphql'); // Add Middleware for GraphQL Resolvers over Express HTTP
 const { buildSchema } = require('graphql'); // Javascript Object-Destructuring (pull objects from packages)
 
+// dummy in-memory array (temporary)
+const events = [];
+
 const app = express();
 
 app.use(bodyParser.json()); // JSON parsing Middleware added
@@ -39,11 +42,18 @@ app.use('/graphql', graphqlHttp({
     `),
     rootValue: {
         events: () => {
-            return ['Cooking', 'All-Night Coding', 'Romantic'];
+            return events;
         },
         createEvent: (args) => {
-            const eventName = args.name; // same as that of the parameter for `createEvent`
-            return eventName;
+            const event = {
+                _id: Math.random().toString(),
+                title: args.eventInput.title,
+                description: args.eventInput.description,
+                price: +args.eventInput.price,
+                date: args.eventInput.date
+            };
+            events.push(event);
+            return event;
 
         }
     },
