@@ -4,8 +4,8 @@ const graphqlHttp = require('express-graphql'); // Add Middleware for GraphQL Re
 const { buildSchema } = require('graphql'); // Javascript Object-Destructuring (pull objects from packages)
 const mongoose = require('mongoose'); // MongoDB Third-Party package
 
-// dummy in-memory array (temporary)
-const events = [];
+
+const Event = require('./models/event'); // MongoDB Event Model
 
 const app = express();
 
@@ -43,18 +43,36 @@ app.use('/graphql', graphqlHttp({
     `),
     rootValue: {
         events: () => {
-            return events;
+            return Event.find()
+                .then(events => {
+                    return events.map( event => {
+                        event._doc._id = event.id;
+                        return event._doc;
+                    });
+                })
+                .catch(err => {
+                    console.log(err);
+                    throw err;
+                })
         },
         createEvent: (args) => {
-            const event = {
-                _id: Math.random().toString(),
-                title: args.eventInput.title,
-                description: args.eventInput.description,
-                price: +args.eventInput.price,
-                date: args.eventInput.date
-            };
-            events.push(event);
-            return event;
+            const event = new Event({
+               title: args.eventInput.title,
+               description: args.eventInput.description,
+               price: +args.eventInput.price,
+               date: new Date(args.eventInput.date)
+            });
+            return event
+                .save()
+                .then(result => {
+                    console.log(result);
+                    // return { ...result._doc };
+                    return result._doc
+                })
+                .catch(err => {
+                    console.log(err);
+                    throw err;
+                });
 
         }
     },
@@ -62,7 +80,7 @@ app.use('/graphql', graphqlHttp({
 }));
 
 mongoose.connect(
-    `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_CLUSTER_NAME}-p8e7q.mongodb.net/test?retryWrites=true`)
+    `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_CLUSTER_NAME}-p8e7q.mongodb.net/${process.env.MONGO_DB_NAME}?retryWrites=true`)
     .then( () => {
         app.listen(3000);
     }).catch(err => {
