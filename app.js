@@ -2,6 +2,7 @@ const express = require('express'); // Add Express Module
 const bodyParser = require('body-parser'); // Add Body-Parser Middleware for JSON handling in Requests
 const graphqlHttp = require('express-graphql'); // Add Middleware for GraphQL Resolvers over Express HTTP
 const { buildSchema } = require('graphql'); // Javascript Object-Destructuring (pull objects from packages)
+const mongoose = require('mongoose'); // MongoDB Third-Party package
 
 // dummy in-memory array (temporary)
 const events = [];
@@ -60,4 +61,11 @@ app.use('/graphql', graphqlHttp({
     graphiql: true
 }));
 
-app.listen(3000);
+mongoose.connect(
+    `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_CLUSTER_NAME}-p8e7q.mongodb.net/test?retryWrites=true`)
+    .then( () => {
+        app.listen(3000);
+    }).catch(err => {
+        console.log(err);
+    });
+
