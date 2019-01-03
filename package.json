@@ -1,0 +1,15 @@
+{
+  "name": "graphql-express-app",
+  "version": "0.0.1",
+  "description": "Academind's YouTube Series on GraphQL-Express-React",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "keywords": ["graphql", "express", "node.js"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {}
+}
