@@ -5,7 +5,7 @@ const app = express();
 
 app.use(bodyParser.json()); // JSON parsing Middleware added
 
-app.use('/', (req, res, next) => {
+app.get('/', (req, res, next) => {
    res.send('Hello World!');
 });
 
