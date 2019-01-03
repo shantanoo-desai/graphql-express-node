@@ -1,6 +1,6 @@
 {
   "name": "graphql-express-app",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Academind's YouTube Series on GraphQL-Express-React",
   "main": "app.js",
   "scripts": {
@@ -18,7 +18,8 @@
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "express-graphql": "^0.7.1",
-    "graphql": "^14.0.2"
+    "graphql": "^14.0.2",
+    "mongoose": "^5.4.1"
   },
   "devDependencies": {
     "nodemon": "^1.18.9"
