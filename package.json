@@ -1,6 +1,6 @@
 {
   "name": "graphql-express-app",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Academind's YouTube Series on GraphQL-Express-React",
   "main": "app.js",
   "scripts": {
