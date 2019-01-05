@@ -5,14 +5,14 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app.js"
+    "start": "nodemon --exec babel-node app.js"
   },
   "keywords": [
     "graphql",
     "express",
     "node.js"
   ],
-  "author": "",
+  "author": "Shantanoo Desai",
   "license": "MIT",
   "dependencies": {
     "body-parser": "^1.18.3",
@@ -22,6 +22,10 @@
     "mongoose": "^5.4.1"
   },
   "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/node": "^7.2.2",
+    "@babel/plugin-proposal-object-rest-spread": "^7.2.0",
+    "@babel/preset-env": "^7.2.3",
     "nodemon": "^1.18.9"
   }
 }
