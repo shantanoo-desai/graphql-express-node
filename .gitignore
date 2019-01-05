@@ -83,4 +83,13 @@ typings/
 # DynamoDB Local files
 .dynamodb/
 
+# Nodemon Local files
+nodemon.json
+
+# Babel Local files
+dist/
+
+# Webstorm Local files
+.idea/
+
 # End of https://www.gitignore.io/api/node
