@@ -73,14 +73,26 @@ app.use('/graphql', graphqlHttp({
                title: args.eventInput.title,
                description: args.eventInput.description,
                price: +args.eventInput.price,
-               date: new Date(args.eventInput.date)
+               date: new Date(args.eventInput.date),
+                creator: '5c34e068de64d30724ba6a1b' // currently hard code ID for User
             });
+            let createdEvent;
             return event
                 .save()
                 .then(result => {
-                    console.log(result);
-                    return { ...result._doc, _id: result._doc._id.toString() };
+                    createdEvent ={ ...result._doc, _id: result._doc._id.toString() };
+                    return User.findById('5c34e068de64d30724ba6a1b'); // find the creator for Event
                     // return result._doc
+                })
+                .then(user => { // user Promise
+                    if (!user) { // if user already exists
+                        throw new Error('No User Found');
+                    }
+                    user.createdEvents.push(event); // add the respective event to the createdEvents Array
+                    return user.save();
+                })
+                .then(result => { // result returned for `user`.save and not for `event`.save()
+                    return createdEvent;
                 })
                 .catch(err => {
                     console.log(err);
