@@ -3,8 +3,8 @@ const bodyParser = require('body-parser'); // Add Body-Parser Middleware for JSO
 const graphqlHttp = require('express-graphql'); // Add Middleware for GraphQL Resolvers over Express HTTP
 const mongoose = require('mongoose'); // MongoDB Third-Party package
 
-const graphQlSchema = require('./graphql/schema');
-const graphQlResolvers = require('./graphql/resolvers');
+const graphQlSchema = require('./graphql/schema/index');
+const graphQlResolvers = require('./graphql/resolvers/index');
 const app = express();
 
 app.use(bodyParser.json()); // JSON parsing Middleware added
