@@ -5,11 +5,13 @@ const mongoose = require('mongoose'); // MongoDB Third-Party package
 
 const graphQlSchema = require('./graphql/schema/index');
 const graphQlResolvers = require('./graphql/resolvers/index');
+const isAuth = require('./middleware/is-auth');
 const app = express();
 
 app.use(bodyParser.json()); // JSON parsing Middleware added
 
 
+app.use(isAuth);
 app.use('/graphql', graphqlHttp({
     schema: graphQlSchema,
     rootValue: graphQlResolvers,
