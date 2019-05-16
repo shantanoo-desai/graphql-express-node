@@ -35,6 +35,7 @@ const transformEvent = event => {
 };
 
 const user = async userId => {
+    console.log(userId);
     try {
         const user = await User.findById(userId);
         return { ...user._doc,
@@ -49,6 +50,7 @@ const user = async userId => {
 };
 
 const transformBooking = booking => {
+    console.log(booking);
     return {
         ...booking._doc,
         _id: booking.id,

@@ -18,17 +18,17 @@ module.exports = {
         }
     },
     bookEvent: async (args) => {
-        try {
+        // try {
             const fetchedEvent = await Event.findOne({_id: args.eventId});
             const booking = new Booking({
-                user: '5c34e068de64d30724ba6a1b',
+                user: '5c386195e53f05282804bdd9',
                 event: fetchedEvent
             });
             const result = await booking.save();
             return transformBooking(result);
-        } catch (e) {
-            throw e;
-        }
+        // } catch (e) {
+        //     throw e;
+        // }
     },
     cancelBooking: async args => {
         try {
