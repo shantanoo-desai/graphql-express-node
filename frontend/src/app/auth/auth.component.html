@@ -1,15 +1,14 @@
-<form class="auth-form"> 
+<form class="auth-form" #authForm="ngForm" (ngSubmit)="onSubmit()"> 
     <div class="form-control">
         <label for="email">E-Mail</label>
-        <input type="email" id="email"/>
+        <input type="email" id="email" name="email" #email="ngModel" required [(ngModel)]="model.email"/>
     </div>
     <div class="form-control">
         <label for="password">Password</label>
-        <input type="password" id="password"/>
+        <input type="password" id="password" name="password" #password="ngModel" required [(ngModel)]="model.password"/>
     </div>
     <div class="form-actions">
-        <button type="submit">Submit</button>
+        <button type="submit" [disabled]="!authForm.form.valid">Submit</button>
         <button type="button"> Switch to Sign-Up</button>
     </div>
-    
 </form>
