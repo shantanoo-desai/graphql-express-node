@@ -11,6 +11,7 @@ import { AuthService } from './auth.service';
 export class AuthComponent implements OnInit {
 
   model = new User('', '');
+  logIn = true;
 
   constructor(private authService: AuthService) { }
 
@@ -18,17 +19,31 @@ export class AuthComponent implements OnInit {
   }
 
   onSubmit() {
-    // console.log(this.model);
-    const requestBody = {
-      query: `
-        mutation {
-          createUser(userInput: {email: "${this.model.email}", password: "${this.model.password}"}) {
-            _id
-            email
+    let  requestBody = {};
+    if (this.logIn) {
+      requestBody = {
+        query: `
+          query {
+            login(email: "${this.model.email}", password: "${this.model.password}") {
+                userId
+                token
+                tokenExpiration
+              }
+            }
+        `
+      };
+    } else {
+      requestBody = {
+        query: `
+          mutation {
+            createUser(userInput: {email: "${this.model.email}", password: "${this.model.password}"}) {
+              _id
+              email
+            }
           }
-        }
-      `
-    };
+        `
+      };
+    }
     this.authService.addUser(requestBody)
       .subscribe(result => {
         console.log(result);

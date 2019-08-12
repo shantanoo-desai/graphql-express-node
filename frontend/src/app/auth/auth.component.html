@@ -9,6 +9,6 @@
     </div>
     <div class="form-actions">
         <button type="submit" [disabled]="!authForm.form.valid">Submit</button>
-        <button type="button"> Switch to Sign-Up</button>
+        <button type="button" (click)="logIn = !logIn"> Switch to {{logIn ? 'Signup': 'Login'}}</button>
     </div>
 </form>
