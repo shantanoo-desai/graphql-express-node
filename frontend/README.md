@@ -36,3 +36,17 @@ Adding Navbar
 ### Video no. 13
 Hitting the API
 
+1. adapt the Authentication form in `auth.component.html` and `auth.component.css`
+2. add `models/User.ts` into the `src/app/auth` to create a `User` Class
+3. Utilize it to create a `model` when user enters credentials
+4. Use [Angular Template-Driven Forms Documentation](https://angular.io/guide/forms) as reference to build the Authentication Form
+5. Create `auth.service.ts` to send Authentication Data to backend
+6. Add `HttpClientModule` to `app.module.ts`
+7. create `addUser` service for User creation and try submitting a new user (should throw CORS error)
+8. Adapt Backend code for CORS
+9. use `logIn: boolean` for Default Mode: Login => `logIn = true`
+10. toggle the value of `logIn` to change between Login Mode or Signup Mode
+11. Based on `logIn` create a different `requestBody` for the GraphQL Endpoint
+        if (logIn) { use `login(email: String!, password: String!` } else { use `createUser`}
+12. Console log the returned values from the endpoint
+
