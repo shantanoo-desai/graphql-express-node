@@ -24,3 +24,15 @@ Following are documented steps to reproduce the Frontend:
 ### Video no. 12
 Adding Navbar
 
+1. generate new navbar component
+
+        ng g c --spec false navigation
+
+2. adapt the `navigation.component.html` accordingly
+3. add the component to `app.component.html`
+4. adapt the CSS Classes for navigation
+5. add CSS Class for `main` content
+
+### Video no. 13
+Hitting the API
+
