@@ -9,6 +9,8 @@ import { AuthComponent } from './auth/auth.component';
 import { EventsComponent } from './events/events.component';
 import { BookingsComponent } from './bookings/bookings.component';
 import { NavigationComponent } from './navigation/navigation.component';
+import { AuthService } from './auth/auth.service';
+import { AuthGuardService } from './auth/auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,7 @@ import { NavigationComponent } from './navigation/navigation.component';
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [AuthService, AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

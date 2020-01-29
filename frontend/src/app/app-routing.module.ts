@@ -4,7 +4,7 @@ import { AuthComponent } from './auth/auth.component';
 import { EventsComponent } from './events/events.component';
 import { BookingsComponent } from './bookings/bookings.component';
 
-
+import { AuthGuardService } from './auth/auth-guard.service';
 const routes: Routes = [
   {
     path: '',
@@ -21,7 +21,8 @@ const routes: Routes = [
   },
   {
     path: 'bookings',
-    component: BookingsComponent
+    component: BookingsComponent,
+    canActivate: [AuthGuardService]
   }
 ];
 
