@@ -11,7 +11,7 @@ import { AuthService } from './auth.service';
 export class AuthComponent implements OnInit {
 
   model = new User('', '');
-  logIn = true;
+  logInMode = true;
 
   constructor(private authService: AuthService) { }
 
@@ -20,7 +20,8 @@ export class AuthComponent implements OnInit {
 
   onSubmit() {
     let  requestBody = {};
-    if (this.logIn) {
+    if (this.logInMode) {
+      // Get Authentication Token if User Exists
       requestBody = {
         query: `
           query {
@@ -32,6 +33,8 @@ export class AuthComponent implements OnInit {
             }
         `
       };
+      // Sign-In User
+      this.authService.logInUser(requestBody);
     } else {
       requestBody = {
         query: `
@@ -43,11 +46,13 @@ export class AuthComponent implements OnInit {
           }
         `
       };
-    }
-    this.authService.addUser(requestBody)
-      .subscribe(result => {
-        console.log(result);
+
+      this.authService.signUpUser(requestBody)
+      .subscribe((result: any) => {
+        console.log('New User Created: ' +  result.data.createUser.email);
+        console.log('New User ID: ' + result.data.createUser._id);
       });
+    }
   }
 
 }
