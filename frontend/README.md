@@ -50,3 +50,11 @@ Hitting the API
         if (logIn) { use `login(email: String!, password: String!` } else { use `createUser`}
 12. Console log the returned values from the endpoint
 
+### Video no. 14
+Using the Token
+
+1. Add new service methods for user creation / login / logout in `auth.service.ts`
+2. use `localStorage` to store credentials
+3. create `auth-guard.service.ts` to provide Route Activation based on Authentication
+4. Only allow `auth` and `events` routes to be accessible when one is not logged in
+5. Adapt Navigation UI with credentials logic
